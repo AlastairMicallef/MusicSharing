@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicSharingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Audios">
+          <Key>
+            <PropertyRef Name="audioID" />
+          </Key>
+          <Property Name="audioID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="audioURL" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="userID" Type="uniqueidentifier" />
+          <Property Name="genreID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="audioID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="comment" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genreID" />
+          </Key>
+          <Property Name="genreID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="genreName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="audioID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="permission" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="roleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="userRolesID" />
+          </Key>
+          <Property Name="userRolesID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="roleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Audios__genreID__1920BF5C">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Audios" Type="Self.Audios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genreID" />
+            </Principal>
+            <Dependent Role="Audios">
+              <PropertyRef Name="genreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Audios__userID__182C9B23">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Audios" Type="Self.Audios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Audios">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__audioI__24927208">
+          <End Role="Audios" Type="Self.Audios" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audios">
+              <PropertyRef Name="audioID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="audioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__userID__239E4DCF">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permissio__audio__1DE57479">
+          <End Role="Audios" Type="Self.Audios" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audios">
+              <PropertyRef Name="audioID" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="audioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permissio__userI__1ED998B2">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__roleI__08EA5793">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__userI__09DE7BCC">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicSharingDBModelStoreContainer">
+          <EntitySet Name="Audios" EntityType="Self.Audios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Audios__genreID__1920BF5C" Association="Self.FK__Audios__genreID__1920BF5C">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Audios" EntitySet="Audios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Audios__userID__182C9B23" Association="Self.FK__Audios__userID__182C9B23">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Audios" EntitySet="Audios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__audioI__24927208" Association="Self.FK__Comments__audioI__24927208">
+            <End Role="Audios" EntitySet="Audios" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__userID__239E4DCF" Association="Self.FK__Comments__userID__239E4DCF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permissio__audio__1DE57479" Association="Self.FK__Permissio__audio__1DE57479">
+            <End Role="Audios" EntitySet="Audios" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permissio__userI__1ED998B2" Association="Self.FK__Permissio__userI__1ED998B2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__roleI__08EA5793" Association="Self.FK__UserRoles__roleI__08EA5793">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__userI__09DE7BCC" Association="Self.FK__UserRoles__userI__09DE7BCC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicSharingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Audio">
+          <Key>
+            <PropertyRef Name="audioID" />
+          </Key>
+          <Property Name="audioID" Type="Guid" Nullable="false" />
+          <Property Name="audioURL" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="Guid" />
+          <Property Name="genreID" Type="Guid" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Audios__genreID__1920BF5C" FromRole="Audios" ToRole="Genre" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Audios__userID__182C9B23" FromRole="Audios" ToRole="Users" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__audioI__24927208" FromRole="Audios" ToRole="Comments" />
+          <NavigationProperty Name="Permissions" Relationship="Self.FK__Permissio__audio__1DE57479" FromRole="Audios" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="Guid" Nullable="false" />
+          <Property Name="userID" Type="Guid" Nullable="false" />
+          <Property Name="audioID" Type="Guid" Nullable="false" />
+          <Property Name="comment1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Audio" Relationship="Self.FK__Comments__audioI__24927208" FromRole="Comments" ToRole="Audios" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Comments__userID__239E4DCF" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genreID" />
+          </Key>
+          <Property Name="genreID" Type="Guid" Nullable="false" />
+          <Property Name="genreName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Audios" Relationship="Self.FK__Audios__genreID__1920BF5C" FromRole="Genre" ToRole="Audios" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="Guid" Nullable="false" />
+          <Property Name="audioID" Type="Guid" Nullable="false" />
+          <Property Name="userID" Type="Guid" Nullable="false" />
+          <Property Name="permission1" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Audio" Relationship="Self.FK__Permissio__audio__1DE57479" FromRole="Permission" ToRole="Audios" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Permissio__userI__1ED998B2" FromRole="Permission" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Guid" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__roleI__08EA5793" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="userRolesID" />
+          </Key>
+          <Property Name="userRolesID" Type="Guid" Nullable="false" />
+          <Property Name="roleID" Type="Guid" Nullable="false" />
+          <Property Name="userID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__UserRoles__roleI__08EA5793" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserRoles__userI__09DE7BCC" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Guid" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Audios" Relationship="Self.FK__Audios__userID__182C9B23" FromRole="Users" ToRole="Audios" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__userID__239E4DCF" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Permissions" Relationship="Self.FK__Permissio__userI__1ED998B2" FromRole="Users" ToRole="Permission" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__userI__09DE7BCC" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK__Audios__genreID__1920BF5C">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Audios" Type="Self.Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genreID" />
+            </Principal>
+            <Dependent Role="Audios">
+              <PropertyRef Name="genreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Audios__userID__182C9B23">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Audios" Type="Self.Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Audios">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__audioI__24927208">
+          <End Role="Audios" Type="Self.Audio" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audios">
+              <PropertyRef Name="audioID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="audioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permissio__audio__1DE57479">
+          <End Role="Audios" Type="Self.Audio" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audios">
+              <PropertyRef Name="audioID" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="audioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__userID__239E4DCF">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permissio__userI__1ED998B2">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__roleI__08EA5793">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__userI__09DE7BCC">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicSharingDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Audios" EntityType="Self.Audio" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Audios__genreID__1920BF5C" Association="Self.FK__Audios__genreID__1920BF5C">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Audios" EntitySet="Audios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Audios__userID__182C9B23" Association="Self.FK__Audios__userID__182C9B23">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Audios" EntitySet="Audios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__audioI__24927208" Association="Self.FK__Comments__audioI__24927208">
+            <End Role="Audios" EntitySet="Audios" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permissio__audio__1DE57479" Association="Self.FK__Permissio__audio__1DE57479">
+            <End Role="Audios" EntitySet="Audios" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__userID__239E4DCF" Association="Self.FK__Comments__userID__239E4DCF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permissio__userI__1ED998B2" Association="Self.FK__Permissio__userI__1ED998B2">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__roleI__08EA5793" Association="Self.FK__UserRoles__roleI__08EA5793">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__userI__09DE7BCC" Association="Self.FK__UserRoles__userI__09DE7BCC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicSharingDBModelStoreContainer" CdmEntityContainer="MusicSharingDBEntities">
+          <EntitySetMapping Name="Audios">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.Audio">
+              <MappingFragment StoreEntitySet="Audios">
+                <ScalarProperty Name="audioID" ColumnName="audioID" />
+                <ScalarProperty Name="audioURL" ColumnName="audioURL" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="genreID" ColumnName="genreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="commentID" ColumnName="commentID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="audioID" ColumnName="audioID" />
+                <ScalarProperty Name="comment1" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="genreID" ColumnName="genreID" />
+                <ScalarProperty Name="genreName" ColumnName="genreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+                <ScalarProperty Name="audioID" ColumnName="audioID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="permission1" ColumnName="permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="userRolesID" ColumnName="userRolesID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicSharingDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
