@@ -14,9 +14,9 @@ namespace Common
     
     public partial class Comment
     {
-        public System.Guid commentID { get; set; }
-        public System.Guid userID { get; set; }
-        public System.Guid audioID { get; set; }
+        public int commentID { get; set; }
+        public int userID { get; set; }
+        public int audioID { get; set; }
         public string comment1 { get; set; }
     
         public virtual Audio Audio { get; set; }

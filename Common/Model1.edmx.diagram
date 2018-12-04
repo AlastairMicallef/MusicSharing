@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f5f0f8fa09ff4a63a1ad7a59e1e5c15e" Name="Diagram1">
-        <EntityTypeShape EntityType="MusicSharingDBModel.Audio" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicSharingDBModel.Comment" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicSharingDBModel.Genre" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicSharingDBModel.Permission" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicSharingDBModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicSharingDBModel.UserRole" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="373e96995ebd4c77a2db6e153f809639" Name="Diagram1">
+        <EntityTypeShape EntityType="MusicSharingDBModel.Audio" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSharingDBModel.Comment" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSharingDBModel.Genre" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSharingDBModel.Permission" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSharingDBModel.Role" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSharingDBModel.UserRole" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicSharingDBModel.User" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Audios__genreID__1920BF5C" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Audios__userID__182C9B23" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Comments__audioI__24927208" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Permissio__audio__1DE57479" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Comments__userID__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__Permissio__userI__1ED998B2" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__UserRoles__roleI__08EA5793" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicSharingDBModel.FK__UserRoles__userI__09DE7BCC" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Audios__genreID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Audios__userID__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Comments__audioI__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Permissio__audio__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Comments__userID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__Permissio__userI__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__UserRoles__roleI__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSharingDBModel.FK__UserRoles__userI__145C0A3F" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

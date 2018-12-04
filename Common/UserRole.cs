@@ -14,9 +14,9 @@ namespace Common
     
     public partial class UserRole
     {
-        public System.Guid userRolesID { get; set; }
-        public System.Guid roleID { get; set; }
-        public System.Guid userID { get; set; }
+        public int userRolesID { get; set; }
+        public int roleID { get; set; }
+        public int userID { get; set; }
     
         public virtual Role Role { get; set; }
         public virtual User User { get; set; }

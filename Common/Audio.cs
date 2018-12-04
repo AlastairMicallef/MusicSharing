@@ -21,10 +21,11 @@ namespace Common
             this.Permissions = new HashSet<Permission>();
         }
     
-        public System.Guid audioID { get; set; }
+        public int audioID { get; set; }
+        public string audioname { get; set; }
         public string audioURL { get; set; }
-        public Nullable<System.Guid> userID { get; set; }
-        public Nullable<System.Guid> genreID { get; set; }
+        public Nullable<int> userID { get; set; }
+        public Nullable<int> genreID { get; set; }
     
         public virtual Genre Genre { get; set; }
         public virtual User User { get; set; }

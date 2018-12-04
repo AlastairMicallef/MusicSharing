@@ -20,7 +20,7 @@ namespace Common
             this.UserRoles = new HashSet<UserRole>();
         }
     
-        public System.Guid roleID { get; set; }
+        public int roleID { get; set; }
         public string roleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

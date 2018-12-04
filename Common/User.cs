@@ -23,7 +23,7 @@ namespace Common
             this.UserRoles = new HashSet<UserRole>();
         }
     
-        public System.Guid userID { get; set; }
+        public int userID { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string email { get; set; }

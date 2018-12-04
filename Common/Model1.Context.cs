@@ -13,10 +13,10 @@ namespace Common
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MusicSharingDBEntities : DbContext
+    public partial class MusicSharingDBEntities2 : DbContext
     {
-        public MusicSharingDBEntities()
-            : base("name=MusicSharingDBEntities")
+        public MusicSharingDBEntities2()
+            : base("name=MusicSharingDBEntities2")
         {
         }
     

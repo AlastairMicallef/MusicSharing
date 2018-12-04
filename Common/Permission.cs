@@ -14,9 +14,9 @@ namespace Common
     
     public partial class Permission
     {
-        public System.Guid permissionID { get; set; }
-        public System.Guid audioID { get; set; }
-        public System.Guid userID { get; set; }
+        public int permissionID { get; set; }
+        public int audioID { get; set; }
+        public int userID { get; set; }
         public byte permission1 { get; set; }
     
         public virtual Audio Audio { get; set; }
