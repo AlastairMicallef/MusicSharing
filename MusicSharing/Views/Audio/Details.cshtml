@@ -1,0 +1,44 @@
+﻿@model Common.Audio
+
+<div>
+    <h4>Audio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.audioname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.audioname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.audioURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.audioURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genreID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.audioID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
