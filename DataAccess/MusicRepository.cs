@@ -17,7 +17,7 @@ namespace DataAccess
 
         public Audio GetAudios(int id)
         {
-            return Entity.Audios.SingleOrDefault(x => x.audioID = id);
+            return Entity.Audios.SingleOrDefault(x => x.audioID == id);
         }
 
         public IQueryable<Audio> GetAudios()
@@ -27,13 +27,13 @@ namespace DataAccess
 
         public void AddAudio(Audio i)
         {
-            Entity.Items.add(i);
+            Entity.Audios.Add(i);
             Entity.SaveChanges();
         }
 
         public void DeleteAudio(Audio a)
         {
-            Entity.Audios.Remove();
+            Entity.Audios.Remove(a);
             Entity.SaveChanges();
         }
     }

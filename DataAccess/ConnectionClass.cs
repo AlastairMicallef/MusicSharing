@@ -9,22 +9,22 @@ namespace DataAccess
 {
     public class ConnectionClass
     {
-        public MusicSharingDBEntities Entity { get; set;}
+        public MusicSharingDBEntities2 Entity { get; set;}
 
         public ConnectionClass()
         {
-            Entity = new MusicSharingDBEntities();
+            Entity = new MusicSharingDBEntities2();
         }
         
         public ConnectionClass(bool isAdmin)
         {
             if(isAdmin)
             {
-                Entity = new MusicSharingDBEntities();
+                Entity = new MusicSharingDBEntities2();
             }
             else
             {
-                Entity = new MusicSharingDBEntities();
+                Entity = new MusicSharingDBEntities2();
                 
             }
         }

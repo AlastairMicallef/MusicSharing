@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Common.Audio>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.audioname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.audioURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre.genreName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.audioname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.audioURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userID)
+        </td>
+        <td>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.audioID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.audioID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.audioID })
+        </td>
+    </tr>
+}
+
+</table>
