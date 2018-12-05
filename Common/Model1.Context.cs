@@ -29,7 +29,7 @@ namespace Common
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> UserRole { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
